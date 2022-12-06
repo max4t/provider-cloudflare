@@ -13,7 +13,7 @@ import (
 
 // Package type metadata.
 const (
-	Group   = "template.upbound.io"
+	Group   = "cloudflare.max4t.xyz"
 	Version = "v1alpha1"
 )
 

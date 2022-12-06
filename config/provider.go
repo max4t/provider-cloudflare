@@ -9,13 +9,14 @@ import (
 	_ "embed"
 
 	ujconfig "github.com/upbound/upjet/pkg/config"
+	"github.com/upbound/upjet/pkg/registry/reference"
 
-	"github.com/upbound/upjet-provider-template/config/null"
+	"github.com/max4t/provider-cloudflare/config/cloudflare"
 )
 
 const (
-	resourcePrefix = "template"
-	modulePath     = "github.com/upbound/upjet-provider-template"
+	resourcePrefix = "cloudflare"
+	modulePath     = "github.com/max4t/provider-cloudflare"
 )
 
 //go:embed schema.json
@@ -27,14 +28,23 @@ var providerMetadata string
 // GetProvider returns provider configuration
 func GetProvider() *ujconfig.Provider {
 	pc := ujconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, []byte(providerMetadata),
-		ujconfig.WithIncludeList(ExternalNameConfigured()),
 		ujconfig.WithDefaultResourceOptions(
+			groupOverrides(),
+			externalNameConfig(),
+			defaultVersion(),
 			ExternalNameConfigurations(),
-		))
+			// externalNameConfigurations(),
+			descriptionOverrides(),
+		),
+		ujconfig.WithRootGroup("cloudflare.max4t.xyz"),
+		ujconfig.WithShortName("cloudflare"),
+		ujconfig.WithIncludeList(ExternalNameConfigured()),
+		ujconfig.WithReferenceInjectors([]ujconfig.ReferenceInjector{reference.NewInjector(modulePath)}),
+	)
 
 	for _, configure := range []func(provider *ujconfig.Provider){
 		// add custom config functions
-		null.Configure,
+		cloudflare.Configure,
 	} {
 		configure(pc)
 	}

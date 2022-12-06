@@ -4,13 +4,23 @@ Copyright 2022 Upbound Inc.
 
 package config
 
-import "github.com/upbound/upjet/pkg/config"
+import (
+	"strings"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/upbound/upjet/pkg/config"
+	"github.com/upbound/upjet/pkg/types/name"
+)
+
+// VersionV1Beta1 is used to signify that the resource has been tested and external name configured
+const VersionV1Beta1 = "v1beta1"
 
 // ExternalNameConfigs contains all external name configurations for this
 // provider.
 var ExternalNameConfigs = map[string]config.ExternalName{
 	// Import requires using a randomly generated ID from provider: nl-2e21sda
-	"null_resource": config.IdentifierFromProvider,
+	"cloudflare_zone":   config.IdentifierFromProvider,
+	"cloudflare_record": config.TemplatedStringAsIdentifier("name", "{{ .parameters.zone_id }}/{{ .external_name }}"),
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the
@@ -35,4 +45,31 @@ func ExternalNameConfigured() []string {
 		i++
 	}
 	return l
+}
+
+func externalNameConfig() config.ResourceOption {
+	return func(r *config.Resource) {
+		r.ExternalName = config.IdentifierFromProvider
+	}
+}
+
+func defaultVersion() config.ResourceOption {
+	return func(r *config.Resource) {
+		r.Version = VersionV1Beta1
+	}
+}
+
+func descriptionOverrides() config.ResourceOption {
+	return func(r *config.Resource) {
+		config.ManipulateEveryField(r.TerraformResource, func(sch *schema.Schema) {
+			sch.Description = ""
+		})
+	}
+}
+
+func groupOverrides() config.ResourceOption {
+	return func(r *config.Resource) {
+		r.ShortGroup = "" //cloudflare"
+		r.Kind = name.NewFromSnake(strings.TrimPrefix(r.Name, "cloudflare_")).Camel
+	}
 }
