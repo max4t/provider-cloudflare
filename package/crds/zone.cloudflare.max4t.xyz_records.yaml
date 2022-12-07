@@ -148,6 +148,8 @@ spec:
                           type: number
                       type: object
                     type: array
+                  name:
+                    type: string
                   priority:
                     type: number
                   proxied:
@@ -234,6 +236,7 @@ spec:
                         type: object
                     type: object
                 required:
+                - name
                 - type
                 type: object
               providerConfigRef:

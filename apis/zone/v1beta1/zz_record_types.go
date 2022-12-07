@@ -158,6 +158,9 @@ type RecordParameters struct {
 	// +kubebuilder:validation:Optional
 	Data []DataParameters `json:"data,omitempty" tf:"data,omitempty"`
 
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
+
 	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 

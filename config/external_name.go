@@ -20,7 +20,7 @@ const VersionV1Beta1 = "v1beta1"
 var ExternalNameConfigs = map[string]config.ExternalName{
 	// Import requires using a randomly generated ID from provider: nl-2e21sda
 	"cloudflare_zone":   config.IdentifierFromProvider,
-	"cloudflare_record": config.TemplatedStringAsIdentifier("name", "{{ .parameters.zone_id }}/{{ .external_name }}"),
+	"cloudflare_record": config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the

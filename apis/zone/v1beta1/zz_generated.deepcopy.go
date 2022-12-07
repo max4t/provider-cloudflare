@@ -368,6 +368,11 @@ func (in *RecordParameters) DeepCopyInto(out *RecordParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Name != nil {
+		in, out := &in.Name, &out.Name
+		*out = new(string)
+		**out = **in
+	}
 	if in.Priority != nil {
 		in, out := &in.Priority, &out.Priority
 		*out = new(float64)
