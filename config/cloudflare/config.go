@@ -13,6 +13,15 @@ func Configure(p *ujconfig.Provider) {
 	p.AddResourceConfigurator("cloudflare_zone", func(r *ujconfig.Resource) {
 		r.ShortGroup = "zone"
 	})
+	p.AddResourceConfigurator("cloudflare_zone_settings_override", func(r *ujconfig.Resource) {
+		r.ShortGroup = "zone"
+		r.Kind = "SettingsOverride"
+		r.References["zone_id"] = ujconfig.Reference{
+			Type:              "Zone",
+			RefFieldName:      "ZoneRef",
+			SelectorFieldName: "ZoneSelector",
+		}
+	})
 	p.AddResourceConfigurator("cloudflare_record", func(r *ujconfig.Resource) {
 		r.ShortGroup = "zone"
 		r.References["zone_id"] = ujconfig.Reference{

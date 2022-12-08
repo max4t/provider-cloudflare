@@ -11,6 +11,7 @@ import (
 
 	providerconfig "github.com/max4t/provider-cloudflare/internal/controller/providerconfig"
 	record "github.com/max4t/provider-cloudflare/internal/controller/zone/record"
+	settingsoverride "github.com/max4t/provider-cloudflare/internal/controller/zone/settingsoverride"
 	zone "github.com/max4t/provider-cloudflare/internal/controller/zone/zone"
 )
 
@@ -20,6 +21,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		providerconfig.Setup,
 		record.Setup,
+		settingsoverride.Setup,
 		zone.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
