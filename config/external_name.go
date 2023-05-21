@@ -19,9 +19,11 @@ const VersionV1Beta1 = "v1beta1"
 // provider.
 var ExternalNameConfigs = map[string]config.ExternalName{
 	// Import requires using a randomly generated ID from provider: nl-2e21sda
-	"cloudflare_zone":                   config.IdentifierFromProvider,
-	"cloudflare_zone_settings_override": config.IdentifierFromProvider,
-	"cloudflare_record":                 config.IdentifierFromProvider,
+	"cloudflare_zone":                                   config.IdentifierFromProvider,
+	"cloudflare_zone_settings_override":                 config.IdentifierFromProvider,
+	"cloudflare_record":                                 config.IdentifierFromProvider,
+	"cloudflare_authenticated_origin_pulls":             config.IdentifierFromProvider,
+	"cloudflare_authenticated_origin_pulls_certificate": config.IdentifierFromProvider,
 }
 
 // ExternalNameConfigurations applies all external name configs listed in the
@@ -70,7 +72,7 @@ func descriptionOverrides() config.ResourceOption {
 
 func groupOverrides() config.ResourceOption {
 	return func(r *config.Resource) {
-		r.ShortGroup = "" //cloudflare"
+		r.ShortGroup = ""
 		r.Kind = name.NewFromSnake(strings.TrimPrefix(r.Name, "cloudflare_")).Camel
 	}
 }

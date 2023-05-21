@@ -7,6 +7,138 @@ package v1beta1
 
 import xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 
+// GetCondition of this AuthenticatedOriginPulls.
+func (mg *AuthenticatedOriginPulls) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this AuthenticatedOriginPulls.
+func (mg *AuthenticatedOriginPulls) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this AuthenticatedOriginPulls.
+func (mg *AuthenticatedOriginPulls) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this AuthenticatedOriginPulls.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *AuthenticatedOriginPulls) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this AuthenticatedOriginPulls.
+func (mg *AuthenticatedOriginPulls) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this AuthenticatedOriginPulls.
+func (mg *AuthenticatedOriginPulls) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this AuthenticatedOriginPulls.
+func (mg *AuthenticatedOriginPulls) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this AuthenticatedOriginPulls.
+func (mg *AuthenticatedOriginPulls) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this AuthenticatedOriginPulls.
+func (mg *AuthenticatedOriginPulls) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this AuthenticatedOriginPulls.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *AuthenticatedOriginPulls) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this AuthenticatedOriginPulls.
+func (mg *AuthenticatedOriginPulls) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this AuthenticatedOriginPulls.
+func (mg *AuthenticatedOriginPulls) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this AuthenticatedOriginPullsCertificate.
+func (mg *AuthenticatedOriginPullsCertificate) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this AuthenticatedOriginPullsCertificate.
+func (mg *AuthenticatedOriginPullsCertificate) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetProviderConfigReference of this AuthenticatedOriginPullsCertificate.
+func (mg *AuthenticatedOriginPullsCertificate) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this AuthenticatedOriginPullsCertificate.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *AuthenticatedOriginPullsCertificate) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this AuthenticatedOriginPullsCertificate.
+func (mg *AuthenticatedOriginPullsCertificate) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this AuthenticatedOriginPullsCertificate.
+func (mg *AuthenticatedOriginPullsCertificate) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this AuthenticatedOriginPullsCertificate.
+func (mg *AuthenticatedOriginPullsCertificate) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this AuthenticatedOriginPullsCertificate.
+func (mg *AuthenticatedOriginPullsCertificate) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetProviderConfigReference of this AuthenticatedOriginPullsCertificate.
+func (mg *AuthenticatedOriginPullsCertificate) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this AuthenticatedOriginPullsCertificate.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *AuthenticatedOriginPullsCertificate) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this AuthenticatedOriginPullsCertificate.
+func (mg *AuthenticatedOriginPullsCertificate) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this AuthenticatedOriginPullsCertificate.
+func (mg *AuthenticatedOriginPullsCertificate) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this Record.
 func (mg *Record) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

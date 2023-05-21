@@ -12,6 +12,74 @@ import (
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
+// ResolveReferences of this AuthenticatedOriginPulls.
+func (mg *AuthenticatedOriginPulls) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AuthenticatedOriginPullsCertificate),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.AuthenticatedOriginPullsCertificateRef,
+		Selector:     mg.Spec.ForProvider.AuthenticatedOriginPullsCertificateSelector,
+		To: reference.To{
+			List:    &AuthenticatedOriginPullsCertificateList{},
+			Managed: &AuthenticatedOriginPullsCertificate{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AuthenticatedOriginPullsCertificate")
+	}
+	mg.Spec.ForProvider.AuthenticatedOriginPullsCertificate = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AuthenticatedOriginPullsCertificateRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ZoneID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ZoneRef,
+		Selector:     mg.Spec.ForProvider.ZoneSelector,
+		To: reference.To{
+			List:    &ZoneList{},
+			Managed: &Zone{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ZoneID")
+	}
+	mg.Spec.ForProvider.ZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ZoneRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this AuthenticatedOriginPullsCertificate.
+func (mg *AuthenticatedOriginPullsCertificate) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ZoneID),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ZoneRef,
+		Selector:     mg.Spec.ForProvider.ZoneSelector,
+		To: reference.To{
+			List:    &ZoneList{},
+			Managed: &Zone{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ZoneID")
+	}
+	mg.Spec.ForProvider.ZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ZoneRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this Record.
 func (mg *Record) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

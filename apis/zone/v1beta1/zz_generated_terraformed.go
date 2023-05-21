@@ -13,6 +13,154 @@ import (
 	"github.com/upbound/upjet/pkg/resource/json"
 )
 
+// GetTerraformResourceType returns Terraform resource type for this AuthenticatedOriginPulls
+func (mg *AuthenticatedOriginPulls) GetTerraformResourceType() string {
+	return "cloudflare_authenticated_origin_pulls"
+}
+
+// GetConnectionDetailsMapping for this AuthenticatedOriginPulls
+func (tr *AuthenticatedOriginPulls) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this AuthenticatedOriginPulls
+func (tr *AuthenticatedOriginPulls) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this AuthenticatedOriginPulls
+func (tr *AuthenticatedOriginPulls) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this AuthenticatedOriginPulls
+func (tr *AuthenticatedOriginPulls) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this AuthenticatedOriginPulls
+func (tr *AuthenticatedOriginPulls) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this AuthenticatedOriginPulls
+func (tr *AuthenticatedOriginPulls) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this AuthenticatedOriginPulls using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *AuthenticatedOriginPulls) LateInitialize(attrs []byte) (bool, error) {
+	params := &AuthenticatedOriginPullsParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *AuthenticatedOriginPulls) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this AuthenticatedOriginPullsCertificate
+func (mg *AuthenticatedOriginPullsCertificate) GetTerraformResourceType() string {
+	return "cloudflare_authenticated_origin_pulls_certificate"
+}
+
+// GetConnectionDetailsMapping for this AuthenticatedOriginPullsCertificate
+func (tr *AuthenticatedOriginPullsCertificate) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"certificate": "spec.forProvider.certificateSecretRef", "private_key": "spec.forProvider.privateKeySecretRef"}
+}
+
+// GetObservation of this AuthenticatedOriginPullsCertificate
+func (tr *AuthenticatedOriginPullsCertificate) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this AuthenticatedOriginPullsCertificate
+func (tr *AuthenticatedOriginPullsCertificate) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this AuthenticatedOriginPullsCertificate
+func (tr *AuthenticatedOriginPullsCertificate) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this AuthenticatedOriginPullsCertificate
+func (tr *AuthenticatedOriginPullsCertificate) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this AuthenticatedOriginPullsCertificate
+func (tr *AuthenticatedOriginPullsCertificate) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// LateInitialize this AuthenticatedOriginPullsCertificate using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *AuthenticatedOriginPullsCertificate) LateInitialize(attrs []byte) (bool, error) {
+	params := &AuthenticatedOriginPullsCertificateParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *AuthenticatedOriginPullsCertificate) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this Record
 func (mg *Record) GetTerraformResourceType() string {
 	return "cloudflare_record"

@@ -10,6 +10,8 @@ import (
 	"github.com/upbound/upjet/pkg/controller"
 
 	providerconfig "github.com/max4t/provider-cloudflare/internal/controller/providerconfig"
+	authenticatedoriginpulls "github.com/max4t/provider-cloudflare/internal/controller/zone/authenticatedoriginpulls"
+	authenticatedoriginpullscertificate "github.com/max4t/provider-cloudflare/internal/controller/zone/authenticatedoriginpullscertificate"
 	record "github.com/max4t/provider-cloudflare/internal/controller/zone/record"
 	settingsoverride "github.com/max4t/provider-cloudflare/internal/controller/zone/settingsoverride"
 	zone "github.com/max4t/provider-cloudflare/internal/controller/zone/zone"
@@ -20,6 +22,8 @@ import (
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		providerconfig.Setup,
+		authenticatedoriginpulls.Setup,
+		authenticatedoriginpullscertificate.Setup,
 		record.Setup,
 		settingsoverride.Setup,
 		zone.Setup,
