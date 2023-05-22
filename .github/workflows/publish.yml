@@ -43,4 +43,6 @@ jobs:
         with:
           images: ghcr.io/${{ github.repository }}
           tags: type=semver,pattern={{version}}
-        
+
+      - name: Build
+        run: echo "$DOCKER_METADATA_OUTPUT_JSON"
