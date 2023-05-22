@@ -45,4 +45,14 @@ jobs:
           tags: type=semver,pattern={{version}}
 
       - name: Build
-        run: echo "$DOCKER_METADATA_OUTPUT_JSON"
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { DOCKER_METADATA_OUTPUT_LABELS } = process.env
+            const labels = JSON.parse(DOCKER_METADATA_OUTPUT_LABELS)
+
+            console.log(labels)
+
+            const args = Object.entries(labels).map(([key, value]) => `--label ${JSON.stringify(key)} ${JSON.stringify(value)}`)
+
+            console.log(args.join(" "))
