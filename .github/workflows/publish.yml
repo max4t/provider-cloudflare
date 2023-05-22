@@ -48,8 +48,8 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const { DOCKER_METADATA_OUTPUT_LABELS } = process.env
-            const labels = JSON.parse(DOCKER_METADATA_OUTPUT_LABELS)
+            const { DOCKER_METADATA_OUTPUT_JSON } = process.env
+            const { labels } = JSON.parse(DOCKER_METADATA_OUTPUT_JSON)
 
             console.log(labels)
 
