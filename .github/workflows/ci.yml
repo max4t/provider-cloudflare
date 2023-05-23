@@ -297,7 +297,7 @@ jobs:
         env:
           # We're using docker buildx, which doesn't actually load the images it
           # builds by default. Specifying --load does so.
-          BUILD_ARGS: "--load ${{ env.BUILD_LABELS }}"
+          BUILD_ARGS: ${{ env.BUILD_LABELS }}
 
       - name: Upload Artifacts to GitHub
         uses: actions/upload-artifact@v2
@@ -306,6 +306,6 @@ jobs:
           path: _output/**
 
       - name: Publish Artifacts
-        run: make publish -n BRANCH_NAME=${GITHUB_REF##*/}
+        run: make publish -n BRANCH_NAME=main
         env:
           XPKG_REG_ORGS: ghcr.io/${{ github.repository_owner }}
