@@ -29,6 +29,6 @@ jobs:
         run: |
           RES="$(curl --header "Authorization: Basic $(cat ~/.docker/config.json | jq -r '.auths["ghcr.io"].auth')" "https://ghcr.io/token?scope=repository:max4t/provider-cloudflare:pull")"
           echo $RES
-          GHCR_TOKEN="$(ecoh $RES | jq -r .token)"
+          GHCR_TOKEN="$(echo $RES | jq -r .token)"
           echo $GHCR_TOKEN
           curl --location -I --header "Authorization: Bearer $GHCR_TOKEN" https://ghcr.io/v2/max4t/provider-cloudflare/blobs/sha256:9285a66fda762d751143539c1780332a7bfd948ffa872d40e4b904ce5e46cc50
