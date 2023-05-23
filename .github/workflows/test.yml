@@ -27,7 +27,7 @@ jobs:
 
       - name: Test
         run: |
-          RES="$(curl --header "Authorization: Basic $(cat ~/.docker/config.json | jq -r '.auths["ghcr.io"].auth')" "https://ghcr.io/token?scope=repository:max4t/provider-cloudflare:pull")"
+          RES="$(curl --header "Authorization: Basic $(cat ~/.docker/config.json | jq -r '.auths["ghcr.io"].auth')" "https://ghcr.io/token?scope=repository:max4t/provider-cloudflare:pull,push")"
           echo $RES
           GHCR_TOKEN="$(echo $RES | jq -r .token)"
           echo $GHCR_TOKEN
