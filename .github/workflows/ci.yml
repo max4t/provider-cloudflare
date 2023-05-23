@@ -306,6 +306,6 @@ jobs:
           path: _output/**
 
       - name: Publish Artifacts
-        run: make publish -n BRANCH_NAME=main
+        run: make publish BRANCH_NAME=main
         env:
           XPKG_REG_ORGS: ghcr.io/${{ github.repository_owner }}
