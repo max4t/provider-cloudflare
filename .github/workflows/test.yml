@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  workflow_dispatch: {}
+
+env:
+  # Common versions
+  GO_VERSION: '1.19'
+  GOLANGCI_VERSION: 'v1.50.0'
+  DOCKER_BUILDX_VERSION: 'v0.8.2'
+
+jobs:
+  publish-artifacts:
+    runs-on: ubuntu-22.04
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Login to Github Packages
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Test
+        run: |
+          GHCR_TOKEN="$(curl --header "Authorization: Basic $(cat ~/.docker/config.json | jq -r '.auths["ghcr.io"].auth')" "https://ghcr.io/token?scope=repository:max4t/provider-cloudflare:pull" | jq -r .token)"
+          curl --location -I --header "Authorization: Bearer $GHCR_TOKEN" https://ghcr.io/v2/max4t/provider-cloudflare/blobs/sha256:9285a66fda762d751143539c1780332a7bfd948ffa872d40e4b904ce5e46cc50

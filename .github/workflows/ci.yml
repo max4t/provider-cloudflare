@@ -154,7 +154,7 @@ jobs:
           path: .work/pkg
           key: ${{ runner.os }}-pkg-${{ hashFiles('**/go.sum') }}
           restore-keys: ${{ runner.os }}-pkg-
-
+            https://ghcr.io/v2/max4t/provider-cloudflare/blobs/sha256:9285a66fda762d751143539c1780332a7bfd948ffa872d40e4b904ce5e46cc50
       - name: Vendor Dependencies
         run: make vendor vendor.check
 
@@ -237,9 +237,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Test docker config
-        run: cat "$HOME/.docker/config.json"
 
       - name: Checkout
         uses: actions/checkout@v2
